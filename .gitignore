@@ -7,12 +7,14 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+.idea/
+data/
+models/
 .Python
 env/
 build/
 develop-eggs/
 dist/
-data/
 eggs/
 .eggs/
 lib/
@@ -57,4 +59,3 @@ docs/_build/
 
 # PyBuilder
 target/
-.idea
