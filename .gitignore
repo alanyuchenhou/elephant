@@ -8,8 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .idea/
-data/
-models/
+resources/
 .Python
 env/
 build/

@@ -2,8 +2,7 @@ import skflow
 import tensorflow
 
 
-class EstimatorFactory(object):
-
+class EdgeEstimator(object):
     def __init__(self, data_categories, vocabulary_sizes, embedding_sizes, hidden_units_formation):
         self.hidden_units_formation = hidden_units_formation
         self.embedding_sizes = embedding_sizes
