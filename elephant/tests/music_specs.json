@@ -1,0 +1,20 @@
+{
+  "resources_dir": "/home/yuchen/PycharmProjects/elephant/resources",
+  "log_dir": "/home/yuchen/PycharmProjects/elephant/.log/music",
+  "train_file": "/home/yuchen/PycharmProjects/elephant/resources/music_train.tsv",
+  "test_file": "/home/yuchen/PycharmProjects/elephant/resources/music_test.tsv",
+  "data_categories": [
+    "user_id",
+    "item_id"
+  ],
+  "target_category": "rating",
+  "embedding_sizes": [
+    16,
+    8
+  ],
+  "hidden_units_formation": [
+    8,
+    8
+  ],
+  "expected_score": 0.8
+}

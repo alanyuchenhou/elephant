@@ -1,0 +1,20 @@
+{
+  "resources_dir": "/home/yuchen/PycharmProjects/elephant/resources",
+  "log_dir": "/home/yuchen/PycharmProjects/elephant/.log/titanic",
+  "train_file": "/home/yuchen/PycharmProjects/elephant/resources/titanic_train.tsv",
+  "test_file": "/home/yuchen/PycharmProjects/elephant/resources/titanic_test.tsv",
+  "data_categories": [
+    "Embarked",
+    "Sex"
+  ],
+  "target_category": "Survived",
+  "embedding_sizes": [
+    3,
+    2
+  ],
+  "hidden_units_formation": [
+    4,
+    4
+  ],
+  "expected_score": 0.8
+}

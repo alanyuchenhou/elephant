@@ -2,8 +2,8 @@ import skflow
 import tensorflow
 
 
-class EdgeEstimatorFactory(object):
-    def __init__(self, data_categories, vocabulary_sizes, embedding_sizes, hidden_units_formation, n_classes=0):
+class EstimatorFactory(object):
+    def __init__(self, data_categories, vocabulary_sizes, embedding_sizes, hidden_units_formation, n_classes):
         self.n_classes = n_classes
         self.hidden_units_formation = hidden_units_formation
         self.embedding_sizes = embedding_sizes
@@ -22,5 +22,5 @@ class EdgeEstimatorFactory(object):
         else:
             return skflow.models.linear_regression(activation_out, target)
 
-    def build_edge_estimator(self):
+    def build_estimator(self):
         return skflow.TensorFlowEstimator(self._build_model, self.n_classes)
