@@ -1,0 +1,16 @@
+{
+  "log_dir": "/home/yuchen/PycharmProjects/elephant/.log/movie",
+  "train_file": "/home/yuchen/PycharmProjects/elephant/resources/movie_train.tsv",
+  "test_file": "/home/yuchen/PycharmProjects/elephant/resources/movie_test.tsv",
+  "target_category": "rating",
+  "data_categories": [
+    "user_id",
+    "item_id"
+  ],
+  "embedding_size": 10,
+  "hidden_units_formation": [
+    10
+  ],
+  "expected_score": 0.1,
+  "steps": 50000
+}
