@@ -7,10 +7,11 @@
     "user_id",
     "item_id"
   ],
-  "embedding_size": 10,
+  "embedding_size": 100,
   "hidden_units_formation": [
+    100,
     10
   ],
-  "expected_score": 0.1,
-  "steps": 50000
+  "expected_error": 0.9,
+  "steps": 1000000
 }

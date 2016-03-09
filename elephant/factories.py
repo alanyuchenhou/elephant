@@ -18,7 +18,6 @@ class EstimatorFactory(object):
         ) for i in range(len(self.data_categories))]
         activation_in = tensorflow.squeeze(tensorflow.concat(2, embeddings), [1])
         activation_out = skflow.ops.dnn(activation_in, self.hidden_units_formation)
-        # return skflow.models.linear_regression(activation_out, target)
         if self.n_classes > 1:
             return skflow.models.logistic_regression(activation_out, target)
         else:
