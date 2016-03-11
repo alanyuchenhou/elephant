@@ -19,6 +19,7 @@ class TestEstimatorFactory(unittest.TestCase):
         target_category = specs['target_category']
         data_categories = specs['data_categories']
         log_path = specs['log_path']
+        figure_path = specs['figure_path']
         embedding_size = specs['embedding_size']
         hidden_units_formation = specs['hidden_units_formation']
         batch_size = 32
@@ -30,13 +31,12 @@ class TestEstimatorFactory(unittest.TestCase):
         categorical_processor = skflow.preprocessing.CategoricalProcessor()
         x_train = numpy.array(list(categorical_processor.fit_transform(train[data_categories])))
         x_test = numpy.array(list(categorical_processor.transform(test[data_categories])))
-        x_train, x_validate, y_train, y_validate = cross_validation.train_test_split(x_train, y_train,
-                                                                                     test_size=0.01, random_state=42)
+        x_train, x_validate, y_train, y_validate = cross_validation.train_test_split(x_train, y_train, test_size=0.1)
         vocabulary_sizes = [len(categorical_processor.vocabularies_[i]) for i in range(len(data_categories))]
         # monitor = monitors.ValidationMonitor(x_validate, y_validate, n_classes=0, print_steps=steps/100,
         #                                      early_stopping_rounds=steps/5)
         edge_estimator_factory = factories.EstimatorFactory(data_categories, vocabulary_sizes, embedding_size,
-                                                            hidden_units_formation, 0)
+                                                            hidden_units_formation)
         estimator = edge_estimator_factory.build_estimator(batch_size, len(x_train) // batch_size)
         with open(log_path, mode='w') as log:
             print('training_error\tvalidation_error', file=log)
