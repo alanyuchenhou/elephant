@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import unittest
 
 import numpy
@@ -19,7 +20,6 @@ class TestEstimatorFactory(unittest.TestCase):
         target_category = specs['target_category']
         data_categories = specs['data_categories']
         log_path = specs['log_path']
-        figure_path = specs['figure_path']
         embedding_size = specs['embedding_size']
         hidden_units_formation = specs['hidden_units_formation']
         batch_size = 32
@@ -40,12 +40,14 @@ class TestEstimatorFactory(unittest.TestCase):
         estimator = edge_estimator_factory.build_estimator(batch_size, len(x_train) // batch_size)
         with open(log_path, mode='w') as log:
             print('training_error\tvalidation_error', file=log)
-            for epoch in range(8):
+            validation_errors = [sys.float_info.max, sys.float_info.max]
+            while validation_errors[-2] >= validation_errors[-1]:
                 estimator.fit(x_train, y_train)
-                errors = [metrics.mean_squared_error(y_train, estimator.predict(x_train)),
-                          metrics.mean_squared_error(y_validate, estimator.predict(x_validate))]
-                print('\t'.join(map(str, errors)), file=log)
-        print('test_error =', metrics.mean_squared_error(y_test, estimator.predict(x_test)))
+                training_error = metrics.mean_squared_error(y_train, estimator.predict(x_train).round())
+                validation_error = metrics.mean_squared_error(y_validate, estimator.predict(x_validate).round())
+                print('\t'.join(map(str, [training_error, validation_error])), file=log)
+                validation_errors.append(validation_error)
+        print('test_error =', metrics.mean_squared_error(y_test, estimator.predict(x_test).round()))
 
         # assert_that(metrics.mean_squared_error(y_test, estimator.predict(x_test)), is_(less_than(expected_error)))
         # estimator.save(log_path)
