@@ -3,8 +3,7 @@ import tensorflow
 
 
 class EstimatorFactory(object):
-    def __init__(self, data_categories, vocabulary_sizes, embedding_size, hidden_units_formation, n_classes, steps):
-        self.steps = steps
+    def __init__(self, data_categories, vocabulary_sizes, embedding_size, hidden_units_formation, n_classes):
         self.n_classes = n_classes
         self.hidden_units_formation = hidden_units_formation
         self.embedding_size = embedding_size
@@ -23,5 +22,6 @@ class EstimatorFactory(object):
         else:
             return skflow.models.linear_regression(activation_out, target)
 
-    def build_estimator(self):
-        return skflow.TensorFlowEstimator(self._build_model, self.n_classes, steps=self.steps)
+    def build_estimator(self, batch_size, steps):
+        return skflow.TensorFlowEstimator(self._build_model, self.n_classes, batch_size=batch_size, steps=steps,
+                                          continue_training=True)

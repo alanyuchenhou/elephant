@@ -1,5 +1,5 @@
 {
-  "log_dir": "/home/yuchen/PycharmProjects/elephant/.log/movie",
+  "log_path": "/home/yuchen/PycharmProjects/elephant/.log/movie.tsv",
   "train_file": "/home/yuchen/PycharmProjects/elephant/resources/movie_train.tsv",
   "test_file": "/home/yuchen/PycharmProjects/elephant/resources/movie_test.tsv",
   "target_category": "rating",
@@ -11,7 +11,5 @@
   "hidden_units_formation": [
     100,
     10
-  ],
-  "expected_error": 0.9,
-  "steps": 1000000
+  ]
 }
