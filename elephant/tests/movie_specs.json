@@ -14,5 +14,6 @@
     16
   ],
   "optimizer": "Adagrad",
-  "learning_rate": 0.01
+  "learning_rate": 0.01,
+  "keep_probability": 0.9
 }

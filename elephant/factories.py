@@ -3,7 +3,9 @@ import tensorflow
 
 
 class EstimatorFactory(object):
-    def __init__(self, data_categories, vocabulary_sizes, embedding_size, hidden_units_formation, n_classes=0):
+    def __init__(self, data_categories, vocabulary_sizes, embedding_size, hidden_units_formation, keep_probability,
+                 n_classes=0):
+        self.keep_probability = keep_probability
         self.n_classes = n_classes
         self.hidden_units_formation = hidden_units_formation
         self.embedding_size = embedding_size
@@ -16,7 +18,7 @@ class EstimatorFactory(object):
             ids[i], self.vocabulary_sizes[i], self.embedding_size, self.data_categories[i]
         ) for i in range(len(self.data_categories))]
         activation_in = tensorflow.squeeze(tensorflow.concat(2, embeddings), [1])
-        activation_out = skflow.ops.dnn(activation_in, self.hidden_units_formation)
+        activation_out = skflow.ops.dnn(activation_in, self.hidden_units_formation, keep_prob=self.keep_probability)
         if self.n_classes > 1:
             return skflow.models.logistic_regression(activation_out, target)
         else:
