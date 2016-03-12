@@ -1,16 +1,18 @@
 {
   "log_path": "/home/yuchen/PycharmProjects/elephant/.log/movie.tsv",
   "figure_path": "/home/yuchen/PycharmProjects/elephant/.log/movie.png",
-  "train_file": "/home/yuchen/PycharmProjects/elephant/resources/movie_train.tsv",
-  "test_file": "/home/yuchen/PycharmProjects/elephant/resources/movie_test.tsv",
+  "data_set": "/home/yuchen/PycharmProjects/elephant/resources/movie.tsv",
   "target_category": "rating",
   "data_categories": [
     "user_id",
     "item_id"
   ],
-  "embedding_size": 100,
+  "batch_size": 32,
+  "embedding_size": 64,
   "hidden_units_formation": [
-    100,
-    10
-  ]
+    64,
+    16
+  ],
+  "optimizer": "Adagrad",
+  "learning_rate": 0.01
 }

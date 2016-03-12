@@ -22,6 +22,6 @@ class EstimatorFactory(object):
         else:
             return skflow.models.linear_regression(activation_out, target)
 
-    def build_estimator(self, batch_size, n_steps):
+    def build_estimator(self, batch_size, n_steps, optimizer, learning_rate):
         return skflow.TensorFlowEstimator(self._build_model, self.n_classes, batch_size=batch_size, steps=n_steps,
-                                          continue_training=True)
+                                          optimizer=optimizer, learning_rate=learning_rate, continue_training=True)
