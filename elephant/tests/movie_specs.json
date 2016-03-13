@@ -7,13 +7,10 @@
     "user_id",
     "item_id"
   ],
-  "batch_size": 32,
-  "embedding_size": 64,
-  "hidden_units_formation": [
-    64,
-    16
-  ],
-  "optimizer": "Adagrad",
+  "n_hidden_layers": 2,
+  "layer_size": 64,
+  "keep_probability": 0.9,
   "learning_rate": 0.01,
-  "keep_probability": 0.9
+  "batch_size": 64,
+  "optimizer": "SGD"
 }

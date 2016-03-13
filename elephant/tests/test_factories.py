@@ -20,8 +20,8 @@ class TestEstimatorFactory(unittest.TestCase):
         target_category = specs['target_category']
         data_categories = specs['data_categories']
         log_path = specs['log_path']
-        embedding_size = specs['embedding_size']
-        hidden_units_formation = specs['hidden_units_formation']
+        layer_size = specs['layer_size']
+        n_hidden_layers = specs['n_hidden_layers']
         batch_size = specs['batch_size']
         data_set = pandas.read_table(specs['data_set'])
         optimizer = specs['optimizer']
@@ -36,8 +36,8 @@ class TestEstimatorFactory(unittest.TestCase):
         vocabulary_sizes = [len(categorical_processor.vocabularies_[i]) for i in range(len(data_categories))]
         # monitor = monitors.ValidationMonitor(x_validate, y_validate, n_classes=0, print_steps=steps/100,
         #                                      early_stopping_rounds=steps/5)
-        edge_estimator_factory = factories.EstimatorFactory(data_categories, vocabulary_sizes, embedding_size,
-                                                            hidden_units_formation, keep_probability)
+        edge_estimator_factory = factories.EstimatorFactory(data_categories, vocabulary_sizes, layer_size,
+                                                            n_hidden_layers, keep_probability)
         estimator = edge_estimator_factory.build_estimator(batch_size, len(x_train) // batch_size, optimizer,
                                                            learning_rate)
         with open(log_path, mode='w') as log:
