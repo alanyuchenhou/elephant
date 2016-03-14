@@ -13,10 +13,10 @@ class EstimatorFactory(object):
 
     def _build_model(self, data, target):
         ids = tensorflow.split(1, len(self.data_categories), data)
-        embeddings = [skflow.ops.categorical_variable(
+        node_vectors = [skflow.ops.categorical_variable(
             ids[i], self.vocabulary_sizes[i], self.embedding_size, self.data_categories[i]
         ) for i in range(len(self.data_categories))]
-        activation_in = tensorflow.squeeze(tensorflow.concat(2, embeddings), [1])
+        activation_in = tensorflow.squeeze(tensorflow.concat(2, node_vectors), [1])
         activation_out = skflow.ops.dnn(activation_in, self.hidden_units_formation, keep_prob=self.keep_probability)
         if self.n_classes > 1:
             return skflow.models.logistic_regression(activation_out, target)
