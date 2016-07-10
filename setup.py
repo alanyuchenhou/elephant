@@ -8,5 +8,5 @@ setup(name='elephant',
       author_email='houych@gmail.com',
       license='MIT',
       packages=find_packages(),
-      install_requires=['pandas', 'skflow', 'sklearn', 'tensorflow', 'scipy', 'numpy'],
+      install_requires=['pandas', 'scikit-learn', 'tensorflow', 'scipy', 'numpy'],
       zip_safe=False)
