@@ -1,7 +1,9 @@
 {
   "log_dir": "/home/yuchen/PycharmProjects/elephant/log",
   "figure_path": "/home/yuchen/PycharmProjects/elephant/log/movie.png",
-  "data_set": "/home/yuchen/PycharmProjects/elephant/resources/ratings.dat",
+  "url": "http://files.grouplens.org/datasets/movielens/ml-1m.zip",
+  "file": "ml-1m/ratings.dat",
+  "separator": "::",
   "attributes": [
     "user_id",
     "item_id",

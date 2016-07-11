@@ -1,15 +1,13 @@
 import math
 
 import numpy
-import pandas
 import tensorflow
 from sklearn import metrics, cross_validation
-from tensorflow.contrib.learn import ops, models, TensorFlowEstimator
-from tensorflow.contrib.learn import preprocessing, monitors
+from tensorflow.contrib.learn import ops, models, TensorFlowEstimator, preprocessing, monitors
 
 
-class EstimatorFactory(object):
-    def __init__(self, config):
+class Estimator(object):
+    def __init__(self, config, data_set):
         self.data_categories = config['data_categories']
         self.batch_size = config['batch_size']
         self.optimizer = config['optimizer']
@@ -19,7 +17,6 @@ class EstimatorFactory(object):
         n_hidden_layers = config['n_hidden_layers']
         self.hidden_units_formation = [layer_size] * n_hidden_layers
         self.embedding_size = layer_size
-        data_set = pandas.read_csv(config['data_set'], sep='::', header=None, names=config['attributes'])
         categorical_processor = preprocessing.CategoricalProcessor()
         self.x = numpy.array(list(categorical_processor.fit_transform(data_set[self.data_categories].values)))
         self.y = data_set[config['target_category']].values
@@ -38,7 +35,7 @@ class EstimatorFactory(object):
         else:
             return models.linear_regression(activation_out, target)
 
-    def dummy(self):
+    def estimate(self):
         x, x_test, y, y_test = cross_validation.train_test_split(self.x, self.y, test_size=0.2)
         x_train, x_validate, y_train, y_validate = cross_validation.train_test_split(x, y, test_size=0.1)
         monitor = monitors.ValidationMonitor(x_validate, y_validate, every_n_steps=(len(x_train) // self.batch_size),
