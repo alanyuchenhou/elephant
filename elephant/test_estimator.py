@@ -7,7 +7,7 @@ import zipfile
 import pandas
 import requests
 
-from estimator import Estimator
+import estimator
 
 
 class TestEstimator(unittest.TestCase):
@@ -17,5 +17,5 @@ class TestEstimator(unittest.TestCase):
         zip_file = zipfile.ZipFile(io.BytesIO(requests.get(config['url']).content))
         data_set = pandas.read_csv(io.StringIO(zip_file.open(config['file']).read().decode('UTF-8')),
                                    sep=config['separator'], header=None, names=config['attributes'], engine='python')
-        estimator = Estimator(config, data_set)
-        estimator.estimate()
+        movie_estimator = estimator.Estimator(config, data_set)
+        movie_estimator.estimate()
