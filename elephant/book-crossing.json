@@ -1,17 +1,7 @@
 {
   "url": "http://www2.informatik.uni-freiburg.de/~cziegler/BX/BX-CSV-Dump.zip",
   "file": "BX-Book-Ratings.csv",
-  "encoding": "ISO-8859-1",
   "separator": ";",
-  "data_categories": [
-    "User-ID",
-    "ISBN"
-  ],
-  "target_category": "Book-Rating",
-  "n_hidden_layers": 2,
-  "layer_size": 64,
-  "learning_rate": 0.01,
-  "dropout": 0.1,
-  "batch_size": 64,
-  "optimizer": "SGD"
+  "engine": "c",
+  "test_size": 0.1
 }

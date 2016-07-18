@@ -1,0 +1,7 @@
+{
+  "url": "http://files.grouplens.org/datasets/movielens/ml-1m.zip",
+  "file": "ml-1m/ratings.dat",
+  "separator": "::",
+  "engine": "python",
+  "test_size": 0.2
+}
