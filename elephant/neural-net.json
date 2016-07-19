@@ -5,5 +5,5 @@
   "layer_size": 22,
   "learning_rate": 0.01,
   "dropout": 0.1,
-  "batch_size": 64
+  "batch_size": 33
 }

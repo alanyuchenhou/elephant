@@ -5,8 +5,9 @@ import zipfile
 
 import pandas
 import requests
+from sklearn import cross_validation, metrics
 
-import estimator
+from elephant.estimator import Estimator
 
 
 def main(data_set_name):
@@ -20,9 +21,13 @@ def main(data_set_name):
     print(data_set.head())
     with open(os.path.join(os.path.dirname(__file__), 'neural-net.json')) as config_file:
         config = json.load(config_file)
-    movie_estimator = estimator.Estimator(config, data_set)
-    error = movie_estimator.estimate(specs['test_size'], config['batch_size'], config['learning_rate'])
-    print('testing_error =', error)
+    x = data_set.ix[:, :2].values
+    estimator = Estimator(config, x)
+    y = data_set.ix[:, 2].values
+    y_train, y_test = cross_validation.train_test_split(y, test_size=specs['test_size'])
+    y_predicted = estimator.estimate(specs['test_size'], config['batch_size'], config['learning_rate'], y_train)
+    print('testing_error =', metrics.mean_absolute_error(y_test, y_predicted))
+
 
 if __name__ == '__main__':
     main('book-crossing')
