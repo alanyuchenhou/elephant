@@ -1,7 +1,6 @@
 from unittest import TestCase
 
 from pandas import DataFrame
-from sklearn import cross_validation
 
 from elephant.estimator import Estimator
 
@@ -22,7 +21,4 @@ class TestEstimator(TestCase):
         x = data_set.ix[:, :2].values
         estimator = Estimator(config, x)
         y = data_set.ix[:, 2].values
-        y_train, y_test = cross_validation.train_test_split(y, test_size=0.2)
-        y_predicted = estimator.estimate(0.1, 33, 0.2, y_train)
-        print(y_test)
-        print(y_predicted)
+        print('testing_error =', estimator.estimate(0.1, 33, 0.2, y))

@@ -5,7 +5,6 @@ import zipfile
 
 import pandas
 import requests
-from sklearn import cross_validation, metrics
 
 from elephant.estimator import Estimator
 
@@ -24,9 +23,7 @@ def main(data_set_name):
     x = data_set.ix[:, :2].values
     estimator = Estimator(config, x)
     y = data_set.ix[:, 2].values
-    y_train, y_test = cross_validation.train_test_split(y, test_size=specs['test_size'])
-    y_predicted = estimator.estimate(specs['test_size'], config['batch_size'], config['learning_rate'], y_train)
-    print('testing_error =', metrics.mean_absolute_error(y_test, y_predicted))
+    print('testing_error =', estimator.estimate(specs['test_size'], config['batch_size'], config['learning_rate'], y))
 
 
 if __name__ == '__main__':

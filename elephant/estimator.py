@@ -2,7 +2,7 @@ import math
 
 import numpy
 import tensorflow
-from sklearn import cross_validation
+from sklearn import cross_validation, metrics
 from tensorflow.contrib.learn import ops, models, TensorFlowEstimator, preprocessing, monitors
 
 
@@ -28,11 +28,11 @@ class Estimator(object):
         else:
             return models.linear_regression(activation_out, target)
 
-    def estimate(self, test_size, batch_size, learning_rate, y_train):
-        x_train, x_test = cross_validation.train_test_split(self.x, test_size=test_size)
-        x_train, x_validate, y_train, y_validate = cross_validation.train_test_split(x_train, y_train, test_size=0.1)
+    def estimate(self, test_size, batch_size, learning_rate, y):
+        x, x_test, y, y_test = cross_validation.train_test_split(self.x, y, test_size=test_size)
+        x_train, x_validate, y_train, y_validate = cross_validation.train_test_split(x, y, test_size=0.1)
         monitor = monitors.ValidationMonitor(x_validate, y_validate, every_n_steps=(len(x_train) // batch_size),
                                              early_stopping_rounds=3)
         estimator = TensorFlowEstimator(self._build_model, self.n_classes, batch_size, learning_rate)
         estimator.fit(x_train, y_train, math.inf, [monitor])
-        return estimator.predict(x_test).round()
+        return metrics.mean_absolute_error(y_test, estimator.predict(x_test).round())
