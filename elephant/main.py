@@ -34,5 +34,6 @@ def main(data_set_name):
 
 if __name__ == '__main__':
     # main('book-crossing')
-    main('movie-lens-1m')
-    main('e-pinions')
+    main('movie-lens-100k')
+    # main('movie-lens-1m')
+    # main('e-pinions')

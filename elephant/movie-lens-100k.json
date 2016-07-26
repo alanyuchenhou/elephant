@@ -1,0 +1,8 @@
+{
+  "url": "http://files.grouplens.org/datasets/movielens/ml-100k.zip",
+  "compression": "zip",
+  "file": "ml-100k/u.data",
+  "separator": "\t",
+  "engine": "c",
+  "test_size": 0.2
+}
