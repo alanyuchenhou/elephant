@@ -1,0 +1,7 @@
+{
+  "url": "https://raw.githubusercontent.com/sidooms/MovieTweetings/master/snapshots/200K/ratings.dat",
+  "compression": "none",
+  "separator": "::",
+  "engine": "python",
+  "test_size": 0.2
+}
