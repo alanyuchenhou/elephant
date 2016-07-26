@@ -1,0 +1,7 @@
+{
+  "url": "http://www.trustlet.org/datasets/downloaded_epinions/ratings_data.txt.bz2",
+  "compression": "bz2",
+  "separator": " ",
+  "engine": "c",
+  "test_size": 0.2
+}
