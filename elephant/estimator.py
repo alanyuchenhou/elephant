@@ -9,9 +9,7 @@ from tensorflow.contrib import learn, layers, framework
 class Estimator(object):
     def __init__(self, config, x):
         self.learning_rate = config['learning_rate']
-        self.n_classes = config['n_classes']
         self.n_ids = config['n_attributes']
-        self.dropout = config['dropout']
         self.layer_size = config['layer_size']
         self.hidden_units_formation = [self.layer_size] * config['n_hidden_layers']
         categorical_processor = learn.preprocessing.CategoricalProcessor()
