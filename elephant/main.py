@@ -37,6 +37,6 @@ def main(data_set_name):
 
 if __name__ == '__main__':
     main('movie-lens-100k')
-    main('movie-lens-1m')
-    main('e-pinions')
-    main('movie-tweeting')
+    # main('movie-lens-1m')
+    # main('e-pinions')
+    # main('movie-tweeting')
