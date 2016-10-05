@@ -26,11 +26,17 @@ class Estimator(object):
         train_op = layers.optimize_loss(loss, framework.get_global_step(), self.learning_rate, 'SGD')
         return prediction, loss, train_op
 
-    def estimate(self, test_size, batch_size, y, steps=math.inf):
+    def estimate(self, y, batch_size, test_size, metric, steps=math.inf):
         x, x_test, y, y_test = cross_validation.train_test_split(self.x, y, test_size=test_size)
         x_train, x_validate, y_train, y_validate = cross_validation.train_test_split(x, y, test_size=0.1)
         monitor = learn.monitors.ValidationMonitor(x_validate, y_validate, every_n_steps=(len(x_train) // batch_size),
                                                    early_stopping_rounds=1)
         estimator = learn.Estimator(self._build_model)
         estimator.fit(x_train, y_train, steps=steps, batch_size=batch_size, monitors=[monitor])
-        return metrics.mean_absolute_error(y_test, estimator.predict(x_test).round())
+        y_predicted = estimator.predict(x_test)
+        if metric == 'MAE':
+            return metrics.mean_absolute_error(y_test, y_predicted)
+        elif metric == 'MSE':
+            return metrics.mean_squared_error(y_test, y_predicted)
+        else:
+            assert False

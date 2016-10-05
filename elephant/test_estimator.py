@@ -12,9 +12,12 @@ class TestEstimator(TestCase):
             "n_hidden_layers": 2,
             "layer_size": 20,
             "learning_rate": 0.1,
-            "batch_size": 8,
+            "batch_size": 1,
         }
         data_set = DataFrame({'id1': [2, 2, 1, 1, 1, ], 'id2': [1, 1, 2, 2, 2, ], 'rating': [2, 2, 3, 3, 3, ]})
-        print(data_set)
         estimator = Estimator(config, data_set.ix[:, :2].values)
-        print('testing_error =', estimator.estimate(0.1, config['batch_size'], data_set.ix[:, 2].values, 8))
+        y = data_set.ix[:, 2].values
+        for metric in ['MSE', 'MAE']:
+            error = estimator.estimate(y, config['batch_size'], 0.1, metric, 8)
+            assert error > 0
+            assert error < 1

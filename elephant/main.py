@@ -3,7 +3,7 @@ import json
 import os
 from bz2 import BZ2File
 from zipfile import ZipFile
-
+import sklearn
 import pandas
 import requests
 
@@ -24,19 +24,17 @@ def main(data_set_name):
     elif compression == 'none':
         data_file = specs['url']
     data_set = pandas.read_csv(data_file, sep=specs['separator'], engine=specs['engine'], skiprows=1)
-    if data_set_name == 'book-crossing':
-        data_set = data_set.ix[data_set['Book-Rating'] != 0]
     print(data_set.head())
     with open(os.path.join(os.path.dirname(__file__), 'neural-net.json')) as config_file:
         config = json.load(config_file)
     x = data_set.ix[:, :2].values
     estimator = Estimator(config, x)
     y = data_set.ix[:, 2].values
-    print('testing_error =', estimator.estimate(specs['test_size'], config['batch_size'], y))
+    if specs['scaling']:
+        y = sklearn.preprocessing.MinMaxScaler(feature_range=(-1, 1)).fit_transform(y)
+    print('testing_error =', estimator.estimate(y, config['batch_size'], specs['test_size'], specs['metric']))
 
 
 if __name__ == '__main__':
-    main('movie-lens-100k')
-    # main('movie-lens-1m')
-    # main('e-pinions')
-    # main('movie-tweeting')
+    data_sets = ['movie-lens-100k', 'movie-lens-1m', 'e-pinions', 'movie-tweeting', 'forum', ]
+    main('forum')
