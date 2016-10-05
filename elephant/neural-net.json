@@ -1,7 +1,7 @@
 {
   "n_attributes": 2,
   "learning_rate": 0.01,
-  "batch_size": 64,
-  "layer_size": 64,
-  "n_hidden_layers": 8
+  "batch_size": 8,
+  "layer_size": 20,
+  "n_hidden_layers": 2
 }
