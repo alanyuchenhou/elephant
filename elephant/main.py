@@ -8,7 +8,7 @@ from elephant.estimator import Estimator
 
 
 def main(data_set_name):
-    with open(os.path.join(os.path.dirname(__file__), data_set_name + '.json')) as specs_file:
+    with open(os.path.join('../specs', data_set_name + '.json')) as specs_file:
         specs = json.load(specs_file)
     data_set = pandas.read_csv(os.path.join('../data', specs['file']), sep=specs['separator'], engine=specs['engine'],
                                skiprows=specs['header_rows'])
