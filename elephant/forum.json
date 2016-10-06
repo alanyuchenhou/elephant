@@ -1,9 +1,10 @@
 {
   "url": "http://opsahl.co.uk/tnet/datasets/OClinks_w.txt",
-  "compression": "none",
+  "file": "OClinks_w.txt",
   "separator": " ",
   "engine": "c",
   "metric": "MSE",
   "scaling": true,
+  "header_rows": 0,
   "test_size": 0.2
 }

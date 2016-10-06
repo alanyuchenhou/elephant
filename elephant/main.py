@@ -1,11 +1,8 @@
-import io
 import json
 import os
-from bz2 import BZ2File
-from zipfile import ZipFile
+import numpy
 import sklearn
 import pandas
-import requests
 
 from elephant.estimator import Estimator
 
@@ -13,29 +10,20 @@ from elephant.estimator import Estimator
 def main(data_set_name):
     with open(os.path.join(os.path.dirname(__file__), data_set_name + '.json')) as specs_file:
         specs = json.load(specs_file)
-    data_file = None
-    compression = specs['compression']
-    if compression == 'bz2':
-        binary_file = BZ2File(io.BytesIO(requests.get(specs['url']).content))
-        data_file = io.StringIO(binary_file.read().decode(errors='ignore'))
-    elif compression == 'zip':
-        binary_file = ZipFile(io.BytesIO(requests.get(specs['url']).content))
-        data_file = io.StringIO(binary_file.open(specs['file']).read().decode(errors='ignore'))
-    elif compression == 'none':
-        data_file = specs['url']
-    data_set = pandas.read_csv(data_file, sep=specs['separator'], engine=specs['engine'], skiprows=1)
+    data_set = pandas.read_csv(os.path.join('../data', specs['file']), sep=specs['separator'], engine=specs['engine'],
+                               skiprows=specs['header_rows'])
     print(data_set.head())
     with open(os.path.join(os.path.dirname(__file__), 'neural-net.json')) as config_file:
         config = json.load(config_file)
     x = data_set.ix[:, :2].values
     estimator = Estimator(config, x)
-    y = data_set.ix[:, 2].values
+    y = data_set.ix[:, 2].values.reshape(-1, 1)
     if specs['scaling']:
-        y = sklearn.preprocessing.MinMaxScaler(feature_range=(-1, 1)).fit_transform(y)
+        y = sklearn.preprocessing.MaxAbsScaler().fit_transform(numpy.log(y))
     print('testing_error =', estimator.estimate(y, config['batch_size'], specs['test_size'], specs['metric']))
 
 
 if __name__ == '__main__':
     recommendation_data = ['movie-lens-100k', 'movie-lens-1m', 'e-pinions', 'movie-tweeting', ]
-    graph_data = ['forum', 'airport', ]
-    main('airport')
+    graph_data = ['airport', 'collaboration', 'forum', ]
+    main('forum')

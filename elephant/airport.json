@@ -1,9 +1,10 @@
 {
   "url": "http://opsahl.co.uk/tnet/datasets/USairport500.txt",
-  "compression": "none",
+  "file": "USairport500.txt",
   "separator": " ",
   "engine": "c",
   "metric": "MSE",
   "scaling": true,
+  "header_rows": 0,
   "test_size": 0.2
 }

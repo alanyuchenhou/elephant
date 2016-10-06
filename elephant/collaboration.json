@@ -1,0 +1,10 @@
+{
+  "url": "http://becs.aalto.fi/~rajkp/DataSets/WorldCitationAndCollaboration.tar.bz2",
+  "file": "countryLevelCollaboration.net",
+  "separator": "\t",
+  "engine": "c",
+  "metric": "MSE",
+  "scaling": true,
+  "header_rows": 228,
+  "test_size": 0.2
+}
