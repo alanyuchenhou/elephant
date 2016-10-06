@@ -36,5 +36,6 @@ def main(data_set_name):
 
 
 if __name__ == '__main__':
-    data_sets = ['movie-lens-100k', 'movie-lens-1m', 'e-pinions', 'movie-tweeting', 'forum', ]
-    main('forum')
+    recommendation_data = ['movie-lens-100k', 'movie-lens-1m', 'e-pinions', 'movie-tweeting', ]
+    graph_data = ['forum', 'airport', ]
+    main('airport')
