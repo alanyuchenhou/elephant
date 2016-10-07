@@ -12,7 +12,7 @@ def main(data_set_name):
     with open(os.path.join('../specs', data_set_name + '.json')) as specs_file:
         specs = json.load(specs_file)
     data_set = pandas.read_csv(os.path.join('../resources', specs['file']), sep=specs['separator'],
-                               engine=specs['engine'], skiprows=specs['header_rows'])
+                               engine=specs['engine'])
     print(data_set.head())
     with open(os.path.join(os.path.dirname(__file__), 'neural-net.json')) as config_file:
         config = json.load(config_file)
