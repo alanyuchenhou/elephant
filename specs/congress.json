@@ -1,0 +1,9 @@
+{
+  "file": "House4.tsv",
+  "separator": "\t",
+  "engine": "c",
+  "metric": "MSE",
+  "scaling": true,
+  "header_rows": 0,
+  "test_size": 0.2
+}
