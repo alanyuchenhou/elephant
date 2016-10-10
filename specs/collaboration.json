@@ -1,5 +1,5 @@
 {
-  "url": "http://becs.aalto.fi/~rajkp/DataSets/WorldCitationAndCollaboration.tar.bz2",
+  "url": "http://becs.aalto.fi/~rajkp/datasets.html",
   "file": "countryLevelCollaboration.net",
   "separator": "\t",
   "engine": "c",

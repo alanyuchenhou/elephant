@@ -27,4 +27,5 @@ def main(data_set_name):
 if __name__ == '__main__':
     recommendation_data = ['movie-lens-100k', 'movie-lens-1m', 'e-pinions', 'movie-tweeting', ]
     graph_data = ['airport', 'collaboration', 'congress', 'forum', ]
-    main('congress')
+    for data in graph_data:
+        main(data)

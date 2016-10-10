@@ -1,5 +1,5 @@
 {
-  "url": "http://opsahl.co.uk/tnet/datasets/USairport500.txt",
+  "url": "https://toreopsahl.com/datasets/#usairports",
   "file": "USairport500.txt",
   "separator": " ",
   "engine": "c",

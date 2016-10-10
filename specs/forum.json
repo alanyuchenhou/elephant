@@ -1,5 +1,5 @@
 {
-  "url": "http://opsahl.co.uk/tnet/datasets/OClinks_w.txt",
+  "url": "https://toreopsahl.com/datasets/#online_social_network",
   "file": "OClinks_w.txt",
   "separator": " ",
   "engine": "c",
