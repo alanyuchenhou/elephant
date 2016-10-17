@@ -29,6 +29,6 @@ if __name__ == '__main__':
     graph_data = ['airport', 'collaboration', 'congress', 'forum', ]
     MSEs = []
     for trial in range(25):
-        MSEs.append(main('forum', 4, 1))
+        MSEs.append(main('airport', 4, 1))
     MSEs = numpy.array(MSEs)
     print(MSEs.mean(), MSEs.std())
