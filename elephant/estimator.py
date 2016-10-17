@@ -7,11 +7,11 @@ from tensorflow.contrib import learn, layers, framework
 
 
 class Estimator(object):
-    def __init__(self, config, x):
+    def __init__(self, x, config, layer_size, n_hidden_layers):
         self.learning_rate = config['learning_rate']
         self.n_ids = config['n_attributes']
-        self.layer_size = config['layer_size']
-        self.hidden_units_formation = [self.layer_size] * config['n_hidden_layers']
+        self.layer_size = layer_size
+        self.hidden_units_formation = [self.layer_size] * n_hidden_layers
         categorical_processor = learn.preprocessing.CategoricalProcessor()
         self.x = numpy.array(list(categorical_processor.fit_transform(x)))
         self.vocabulary_sizes = [len(categorical_processor.vocabularies_[i]) for i in range(self.n_ids)]
