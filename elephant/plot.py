@@ -1,7 +1,7 @@
 import pandas
 
 
-def main():
+def compare():
     data_sets = ['airport', 'collaboration', 'congress', 'forum', ]
     models = ['pWSBM', 'bWSBM', 'SBM', 'DCWBM', 'DCBM', 'Model R', ]
     errors = pandas.DataFrame([
@@ -18,7 +18,11 @@ def main():
     axes.set_xlabel('dataset')
     axes.set_ylabel('MSE')
     axes.legend(loc='lower right', ncol=3)
-    axes.get_figure().savefig('../../../cave/link-weight-errors.png')
+    axes.get_figure().savefig('../../../cave/link-weight-errors')
+
+
+def main():
+    compare()
 
 
 if __name__ == '__main__':
