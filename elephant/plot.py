@@ -1,8 +1,11 @@
 import pandas
+from matplotlib import style
+
+style.use('ggplot')
 
 
 def compare():
-    data_sets = ['airport', 'collaboration', 'congress', 'forum', ]
+    data_sets = ['Airport', 'Collaboration', 'Congress', 'Forum', ]
     models = ['pWSBM', 'bWSBM', 'SBM', 'DCWBM', 'DCBM', 'Model R', ]
     errors = pandas.DataFrame([
         [0.0486, 0.0543, 0.0632, 0.0746, 0.0918, 0.0131, ],
@@ -14,10 +17,11 @@ def compare():
         models,
     )
     print(errors)
-    axes = errors.plot(grid=True, xticks=range(len(data_sets)), marker='o')
+    axes = errors.plot.bar(rot=0, )
     axes.set_xlabel('dataset')
     axes.set_ylabel('MSE')
-    axes.legend(loc='lower right', ncol=3)
+    axes.legend(loc='upper left', ncol=2)
+    axes.get_figure().savefig('../resources/link-weight-errors')
     axes.get_figure().savefig('../../../cave/link-weight-errors')
 
 

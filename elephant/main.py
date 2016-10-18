@@ -51,8 +51,8 @@ def grid_search():
 
 
 def main():
-    grid_search()
-    # experiment('airport', 4, 1, )
+    # grid_search()
+    experiment('airport', 2, 1, )
 
 
 if __name__ == '__main__':
