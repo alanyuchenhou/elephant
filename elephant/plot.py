@@ -1,7 +1,4 @@
 import pandas
-from matplotlib import style
-
-style.use('ggplot')
 
 
 def compare():
@@ -17,10 +14,10 @@ def compare():
         models,
     )
     print(errors)
-    axes = errors.plot.bar(rot=0, )
+    axes = errors.plot.bar(rot=0, figsize=(16, 8,), grid=True, )
     axes.set_xlabel('dataset')
     axes.set_ylabel('error')
-    axes.legend(loc='upper left', ncol=3)
+    axes.legend(loc='upper left', ncol=5, )
     axes.get_figure().savefig('../resources/link-weight-errors')
     axes.get_figure().savefig('../../../cave/link-weight-errors')
 
