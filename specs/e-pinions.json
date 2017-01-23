@@ -1,7 +1,9 @@
 {
   "url": "http://www.trustlet.org/datasets/downloaded_epinions/ratings_data.txt.bz2",
-  "compression": "bz2",
+  "file": "e-pinions.dat",
   "separator": " ",
   "engine": "c",
+  "metric": "MAE",
+  "scaling": false,
   "test_size": 0.2
 }

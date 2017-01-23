@@ -52,7 +52,7 @@ def grid_search():
 
 def main():
     # grid_search()
-    experiment('airport', 2, 1, )
+    experiment('movie-lens-100k', 8, 1, )
 
 
 if __name__ == '__main__':
