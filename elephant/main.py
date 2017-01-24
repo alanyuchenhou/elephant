@@ -26,9 +26,9 @@ def evaluate(data_set_name, layer_size, n_hidden_layers):
     return estimator.estimate(y, config['batch_size'], specs['test_size'], specs['metric'])
 
 
-def experiment(data_set_name, layer_size, hidden_layer_count, ):
+def experiment(data_set_name, layer_size, hidden_layer_count, trial_count, ):
     MSEs = []
-    for trial in range(8):
+    for trial in range(trial_count):
         MSEs.append(evaluate(data_set_name, layer_size, hidden_layer_count, ))
     MSEs = numpy.array(MSEs)
     print(MSEs.mean(), MSEs.std())
@@ -41,7 +41,7 @@ def grid_search():
     hidden_layer_counts = [1, 2, 4, 8, ]
     for layer_size in layer_sizes:
         MSEs.append(
-            [experiment('airport', layer_size, hidden_layer_count) for hidden_layer_count in hidden_layer_counts])
+            [experiment('airport', layer_size, hidden_layer_count, 1) for hidden_layer_count in hidden_layer_counts])
     mses = pandas.DataFrame(numpy.array(MSEs), layer_sizes, hidden_layer_counts)
     print(mses)
     axes = seaborn.heatmap(mses, annot=True, )
@@ -52,7 +52,7 @@ def grid_search():
 
 def main():
     # grid_search()
-    experiment('movie-lens-100k', 8, 1, )
+    experiment('movie-lens-100k', 8, 1, 1, )
 
 
 if __name__ == '__main__':
