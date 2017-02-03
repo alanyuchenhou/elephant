@@ -12,9 +12,9 @@ class Estimator(object):
         self.n_ids = config['n_attributes']
         self.layer_size = layer_size
         self.hidden_units_formation = [self.layer_size] * n_hidden_layers
-        categorical_processor = learn.preprocessing.CategoricalProcessor()
-        self.x = numpy.array(list(categorical_processor.fit_transform(x)))
-        self.vocabulary_sizes = [len(categorical_processor.vocabularies_[i]) for i in range(self.n_ids)]
+        self.categorical_processor = learn.preprocessing.CategoricalProcessor()
+        self.x = numpy.array(list(self.categorical_processor.fit_transform(x)))
+        self.vocabulary_sizes = [len(self.categorical_processor.vocabularies_[i]) for i in range(self.n_ids)]
 
     def _build_model(self, data, target):
         ids = tensorflow.split(1, self.n_ids, data)
@@ -40,3 +40,8 @@ class Estimator(object):
             return metrics.mean_squared_error(y_test, y_predicted)
         else:
             assert False
+
+    def show(self, ):
+        node_vectors = [tensorflow.embedding_lookup(id, self.vocabulary_sizes[1], self.layer_size, str(1)
+                                                    ) for id in range(self.vocabulary_sizes[1])]
+        print(zip(range(self.vocabulary_sizes[1]), node_vectors, ))

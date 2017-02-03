@@ -19,3 +19,4 @@ class TestEstimator(TestCase):
             error = estimator.estimate(y, config['batch_size'], 0.1, metric, 8)
             assert error > 0
             assert error < 1
+        estimator.show()

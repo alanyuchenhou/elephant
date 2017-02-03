@@ -27,12 +27,12 @@ def evaluate(data_set_name, layer_size, n_hidden_layers):
 
 
 def experiment(data_set_name, layer_size, hidden_layer_count, trial_count, ):
-    MSEs = []
+    errors = []
     for trial in range(trial_count):
-        MSEs.append(evaluate(data_set_name, layer_size, hidden_layer_count, ))
-    MSEs = numpy.array(MSEs)
-    print(MSEs.mean(), MSEs.std())
-    return MSEs.mean()
+        errors.append(evaluate(data_set_name, layer_size, hidden_layer_count, ))
+    errors = numpy.array(errors)
+    print(errors.mean(), errors.std())
+    return errors.mean()
 
 
 def grid_search():
@@ -52,7 +52,7 @@ def grid_search():
 
 def main():
     # grid_search()
-    experiment('movie-lens-100k', 8, 1, 1, )
+    experiment('movie-tweeting', 2, 2, 1, )
 
 
 if __name__ == '__main__':
