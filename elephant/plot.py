@@ -18,7 +18,6 @@ def compare():
     axes.set_xlabel('dataset')
     axes.set_ylabel('error')
     axes.legend(loc='upper left', ncol=5, )
-    axes.get_figure().savefig('../resources/link-weight-errors')
     axes.get_figure().savefig('../../../cave/link-weight-errors')
 
 
