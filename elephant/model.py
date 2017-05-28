@@ -14,10 +14,9 @@ CATEGORICAL_COLUMNS = [
     "workclass", "education", "marital_status", "occupation", "relationship", "race", "gender", "native_country",
 ]
 LABEL_COLUMN = "label"
-LOG_DIR = 'log/model_r'
-
-TRAINING_SET = os.path.join(os.path.dirname(__file__), "../resources", "adult.training.csv")
-TESTING_SET = os.path.join(os.path.dirname(__file__), "../resources", "adult.testing.csv")
+LOG_DIR = os.path.join(os.path.dirname(__file__), '../log/model_r')
+TRAINING_SET = os.path.join(os.path.dirname(__file__), "../resources/adult.training.csv")
+TESTING_SET = os.path.join(os.path.dirname(__file__), "../resources/adult.testing.csv")
 
 
 def input_fn(df):
