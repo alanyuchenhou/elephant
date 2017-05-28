@@ -1,8 +1,6 @@
 import os
 import shutil
 import sys
-import tempfile
-import urllib.request
 
 import pandas
 import tensorflow
@@ -18,23 +16,8 @@ CATEGORICAL_COLUMNS = [
 LABEL_COLUMN = "label"
 LOG_DIR = 'log/model_r'
 
-
-def download_data():
-    train_file = tempfile.NamedTemporaryFile(delete=False)
-    urllib.request.urlretrieve(
-        "http://mlr.cs.umass.edu/ml/machine-learning-databases/adult/adult.data", train_file.name,
-    )
-    train_file_name = train_file.name
-    train_file.close()
-    print("Training data is downloaded to %s" % train_file_name)
-    test_file = tempfile.NamedTemporaryFile(delete=False)
-    urllib.request.urlretrieve(
-        "http://mlr.cs.umass.edu/ml/machine-learning-databases/adult/adult.test", test_file.name,
-    )
-    test_file_name = test_file.name
-    test_file.close()
-    print("Test data is downloaded to %s" % test_file_name)
-    return train_file_name, test_file_name
+TRAINING_SET = os.path.join(os.path.dirname(__file__), "../resources", "adult.training.csv")
+TESTING_SET = os.path.join(os.path.dirname(__file__), "../resources", "adult.testing.csv")
 
 
 def input_fn(df):
@@ -56,18 +39,8 @@ def train_and_eval(train_steps, ):
     tensorflow.logging.set_verbosity(tensorflow.logging.INFO)
     if os.path.exists(LOG_DIR):
         shutil.rmtree(LOG_DIR)
-    train_file_name, test_file_name = download_data()
-    df_train = pandas.read_csv(
-        tensorflow.gfile.Open(train_file_name),
-        names=COLUMNS,
-        skipinitialspace=True,
-        engine="python")
-    df_test = pandas.read_csv(
-        tensorflow.gfile.Open(test_file_name),
-        names=COLUMNS,
-        skipinitialspace=True,
-        skiprows=1,
-        engine="python")
+    df_train = pandas.read_csv(TRAINING_SET, names=COLUMNS, skipinitialspace=True, engine="python", )
+    df_test = pandas.read_csv(TESTING_SET, names=COLUMNS, skipinitialspace=True, skiprows=1, engine="python", )
 
     # remove NaN elements
     df_train = df_train.dropna(how='any', axis=0)
