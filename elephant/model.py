@@ -11,7 +11,7 @@ COLUMNS = [
     "gender", "capital_gain", "capital_loss", "hours_per_week", "native_country", "income_bracket",
 ]
 CATEGORICAL_COLUMNS = [
-    "workclass", "education", "marital_status", "occupation", "relationship", "race", "gender", "native_country",
+    "occupation", "native_country",
 ]
 LABEL_COLUMN = "label"
 LOG_DIR = os.path.join(os.path.dirname(__file__), '../log/model_r')
@@ -47,13 +47,15 @@ def train_and_eval(train_steps, ):
     df_train[LABEL_COLUMN] = (df_train["income_bracket"].apply(lambda x: ">50K" in x)).astype(int)
     df_test[LABEL_COLUMN] = (df_test["income_bracket"].apply(lambda x: ">50K" in x)).astype(int)
     sparse_columns = [
-        layers.sparse_column_with_hash_bucket(column, hash_bucket_size=1000) for column in CATEGORICAL_COLUMNS
+        layers.sparse_column_with_hash_bucket(
+            attribute, hash_bucket_size=len(set(df_train[attribute]))
+        ) for attribute in CATEGORICAL_COLUMNS
     ]
     embedding_columns = [
         layers.embedding_column(column, dimension=8) for column in sparse_columns
     ]
     m = learn.DNNClassifier(
-        hidden_units=[100, 50, ],
+        hidden_units=[10, 50, ],
         feature_columns=embedding_columns,
         model_dir=LOG_DIR,
         config=learn.RunConfig(save_checkpoints_secs=1, ),
