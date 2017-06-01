@@ -4,7 +4,7 @@ import sys
 
 import pandas
 import tensorflow
-from tensorflow.contrib import learn, layers, metrics
+from tensorflow.contrib import learn, layers, metrics, tensorboard
 
 COLUMNS = [
     "age", "workclass", "fnlwgt", "education", "education_num", "marital_status", "occupation", "relationship", "race",
@@ -15,6 +15,9 @@ CATEGORICAL_COLUMNS = [
 ]
 LABEL_COLUMN = "label"
 LOG_DIR = os.path.join(os.path.dirname(__file__), '../log/model_r')
+if os.path.exists(LOG_DIR):
+    shutil.rmtree(LOG_DIR)
+METADATA_PATH = os.path.join(LOG_DIR, 'metadata.tsv')
 TRAINING_SET = os.path.join(os.path.dirname(__file__), "../resources/adult.training.csv")
 TESTING_SET = os.path.join(os.path.dirname(__file__), "../resources/adult.testing.csv")
 
@@ -28,6 +31,7 @@ def input_fn(df):
         )
         for attribute in CATEGORICAL_COLUMNS
     }
+
     feature_cols = dict(categorical_cols)
     # Converts the label column into a constant Tensor.
     label = tensorflow.constant(df[LABEL_COLUMN].values)
@@ -36,16 +40,16 @@ def input_fn(df):
 
 def train_and_eval(train_steps, ):
     tensorflow.logging.set_verbosity(tensorflow.logging.INFO)
-    if os.path.exists(LOG_DIR):
-        shutil.rmtree(LOG_DIR)
     df_train = pandas.read_csv(TRAINING_SET, names=COLUMNS, skipinitialspace=True, engine="python", )
     df_test = pandas.read_csv(TESTING_SET, names=COLUMNS, skipinitialspace=True, skiprows=1, engine="python", )
 
     # remove NaN elements
     df_train = df_train.dropna(how='any', axis=0)
     df_test = df_test.dropna(how='any', axis=0)
+
     df_train[LABEL_COLUMN] = (df_train["income_bracket"].apply(lambda x: ">50K" in x)).astype(int)
     df_test[LABEL_COLUMN] = (df_test["income_bracket"].apply(lambda x: ">50K" in x)).astype(int)
+
     sparse_columns = [
         layers.sparse_column_with_hash_bucket(
             attribute, hash_bucket_size=len(set(df_train[attribute]))
@@ -65,7 +69,12 @@ def train_and_eval(train_steps, ):
         "precision": learn.MetricSpec(metric_fn=metrics.streaming_precision, prediction_key="classes"),
         "recall": learn.MetricSpec(metric_fn=metrics.streaming_recall, prediction_key="classes"),
     }
-
+    configuration = tensorboard.plugins.projector.ProjectorConfig()
+    embedding = configuration.embeddings.add()
+    embedding.tensor_name = 'dnn/input_from_feature_columns/native_country_embedding/weights:0'
+    embedding.metadata_path = METADATA_PATH
+    summary_writer = tensorflow.summary.FileWriter(LOG_DIR)
+    tensorboard.plugins.projector.visualize_embeddings(summary_writer, configuration)
     monitors = [
         # learn.monitors.CaptureVariable(),
         # learn.monitors.PrintTensor(),
@@ -81,6 +90,9 @@ def train_and_eval(train_steps, ):
     results = m.evaluate(input_fn=lambda: input_fn(df_test), steps=1)
     for key in sorted(results):
         print("%s: %s" % (key, results[key]))
+    with open(METADATA_PATH, 'w+') as metadata:
+        for country in df_train['native_country'].unique():
+            print(country, file=metadata)
 
 
 def main(_):
