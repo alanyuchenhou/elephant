@@ -17,7 +17,15 @@ LABEL_COLUMN = "label"
 LOG_DIR = os.path.join(os.path.dirname(__file__), '../log/model_r')
 if os.path.exists(LOG_DIR):
     shutil.rmtree(LOG_DIR)
-METADATA_PATH = os.path.join(LOG_DIR, 'metadata.tsv')
+
+NATIVE_COUNTRY_EMBEDDING = os.path.join(LOG_DIR, 'native_country_embedding.tsv')
+OCCUPATION_EMBEDDING = os.path.join(LOG_DIR, 'occupation_embedding.tsv')
+
+TENSORS = [{
+    'tensor_name': tensor_name, 'metadata_path': os.path.join(LOG_DIR, tensor_name + '_metadata.tsv')} for
+    tensor_name in ['native_country', 'occupation']
+]
+
 TRAINING_SET = os.path.join(os.path.dirname(__file__), "../resources/adult.training.csv")
 TESTING_SET = os.path.join(os.path.dirname(__file__), "../resources/adult.testing.csv")
 
@@ -69,12 +77,6 @@ def train_and_eval(train_steps, ):
         "precision": learn.MetricSpec(metric_fn=metrics.streaming_precision, prediction_key="classes"),
         "recall": learn.MetricSpec(metric_fn=metrics.streaming_recall, prediction_key="classes"),
     }
-    configuration = tensorboard.plugins.projector.ProjectorConfig()
-    embedding = configuration.embeddings.add()
-    embedding.tensor_name = 'dnn/input_from_feature_columns/native_country_embedding/weights:0'
-    embedding.metadata_path = METADATA_PATH
-    summary_writer = tensorflow.summary.FileWriter(LOG_DIR)
-    tensorboard.plugins.projector.visualize_embeddings(summary_writer, configuration)
     monitors = [
         # learn.monitors.CaptureVariable(),
         # learn.monitors.PrintTensor(),
@@ -90,9 +92,16 @@ def train_and_eval(train_steps, ):
     results = m.evaluate(input_fn=lambda: input_fn(df_test), steps=1)
     for key in sorted(results):
         print("%s: %s" % (key, results[key]))
-    with open(METADATA_PATH, 'w+') as metadata:
-        for country in df_train['native_country'].unique():
-            print(country, file=metadata)
+
+    configuration = tensorboard.plugins.projector.ProjectorConfig()
+    for tensor in TENSORS:
+        embedding = configuration.embeddings.add()
+        embedding.tensor_name = 'dnn/input_from_feature_columns/' + tensor['tensor_name'] + '_embedding/weights:0'
+        embedding.metadata_path = tensor['metadata_path']
+        with open(tensor['metadata_path'], 'w+') as metadata:
+            for item in df_train[tensor['tensor_name']].unique():
+                print(item, file=metadata)
+    tensorboard.plugins.projector.visualize_embeddings(tensorflow.summary.FileWriter(LOG_DIR), configuration)
 
 
 def main(_):
