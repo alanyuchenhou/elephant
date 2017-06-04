@@ -45,9 +45,7 @@ def input_fn(data_frame):
 
 def train_and_eval(train_steps, log_dir, training_set, validation_set, testing_set, ):
     sparse_columns = [
-        layers.sparse_column_with_hash_bucket(
-            attribute, hash_bucket_size=len(set(training_set[attribute]))
-        ) for attribute in FEATURE_ATTRIBUTES
+        layers.sparse_column_with_keys(attribute, training_set[attribute].unique()) for attribute in FEATURE_ATTRIBUTES
     ]
     embedding_columns = [
         layers.embedding_column(column, dimension=8) for column in sparse_columns
