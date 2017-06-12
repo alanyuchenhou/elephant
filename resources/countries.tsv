@@ -1,227 +1,226 @@
-ID	name
-1	Wallis and Futuna
-2	Japan
-3	Jamaica
-4	Jordan
-5	Samoa
-6	Guinea-Bissau
-7	Guam
-8	Guatemala
-9	Greece
-10	Equatorial Guinea
-11	Guadeloupe
-12	Guyana
-13	French Guiana
-14	Georgia
-15	Grenada
-16	United Kingdom
-17	Gabon
-18	Guinea
-19	Gambia
-20	Greenland
-21	Gibraltar
-22	Ghana
-23	Puerto Rico
-24	Palau
-25	Portugal
-26	Paraguay
-27	Panama
-28	French Polynesia
-29	Papua New Guinea
-30	Peru
-31	Pakistan
-32	Philippines
-33	Poland
-34	Zambia
-35	South Africa
-36	Zimbabwe
-37	Montenegro
-38	Moldova, Republic of
-39	Madagascar
-40	Morocco
-41	Monaco
-42	Myanmar
-43	Mali
-44	Mongolia
-45	Marshall Islands
-46	Macedonia, Republic of
-47	Mauritius
-48	Malta
-49	Malawi
-50	Maldives
-51	Martinique
-52	Northern Mariana Islands
-53	Montserrat
-54	Mauritania
-55	Malaysia
-56	Mexico
-57	Mozambique
-58	France
-59	Finland
-60	Fiji
-61	Falkland Islands (Malvinas)
-62	Micronesia, Federated States of
-63	Faroe Islands
-64	Cook Islands
-65	Côte d'Ivoire
-66	Switzerland
-67	Colombia
-68	China
-69	Cameroon
-70	Chile
-71	Canada
-72	Congo
-73	Central African Republic
-74	Congo, The Democratic Republic of the
-75	Czechia
-76	Cyprus
-77	Costa Rica
-78	Curaçao
-79	Cabo Verde
-80	Cuba
-81	Swaziland
-82	Syrian Arab Republic
-83	South Sudan
-84	Suriname
-85	El Salvador
-86	Sao Tome and Principe
-87	Slovakia
-88	Svalbard and Jan Mayen
-89	Slovenia
-90	Somalia
-91	Senegal
-92	San Marino
-93	Sierra Leone
-94	Seychelles
-95	Solomon Islands
-96	Saudi Arabia
-97	Singapore
-98	Sweden
-99	Sudan
-100	Yemen
-101	Mayotte
-102	Lebanon
-103	Saint Lucia
-104	Lao People's Democratic Republic
-105	Sri Lanka
-106	Liechtenstein
-107	Latvia
-108	Lithuania
-109	Luxembourg
-110	Liberia
-111	Lesotho
-112	Libya
-113	Holy See (Vatican City State)
-114	Saint Vincent and the Grenadines
-115	Venezuela, Bolivarian Republic of
-116	Virgin Islands, British
-117	Iraq
-118	Virgin Islands, U.S.
-119	Iceland
-120	Iran, Islamic Republic of
-121	Italy
-122	Viet Nam
-123	Isle of Man
-124	Israel
-125	India
-126	Ireland
-127	Indonesia
-128	Bangladesh
-129	Belgium
-130	Burkina Faso
-131	Bulgaria
-132	Bosnia and Herzegovina
-133	Barbados
-134	Bermuda
-135	Brunei Darussalam
-136	Bolivia, Plurinational State of
-137	Bahrain
-138	Burundi
-139	Benin
-140	Bhutan
-141	Botswana
-142	Brazil
-143	Bahamas
-144	Belarus
-145	Belize
-146	Russian Federation
-147	Rwanda
-148	Serbia
-149	Réunion
-150	Romania
-151	Oman
-152	Croatia
-153	Haiti
-154	Hungary
-155	Honduras
-156	Western Sahara
-157	Estonia
-158	Egypt
-159	Ecuador
-160	Ethiopia
-161	Spain
-162	Eritrea
-163	Uruguay
-164	Uzbekistan
-165	United States
-166	Uganda
-167	Ukraine
-168	Vanuatu
-169	Nicaragua
-170	Netherlands
-171	Norway
-172	Namibia
-173	New Caledonia
-174	Niger
-175	Nigeria
-176	New Zealand
-177	Nepal
-178	Niue
-179	Kyrgyzstan
-180	Kenya
-181	Kiribati
-182	Cambodia
-183	Saint Kitts and Nevis
-184	Comoros
-185	Korea, Republic of
-186	Korea, Democratic People's Republic of
-187	Kuwait
-188	Kazakhstan
-189	Cayman Islands
-190	Dominican Republic
-191	Dominica
-192	Djibouti
-193	Denmark
-194	Germany
-195	Algeria
-196	Tanzania, United Republic of
-197	Tuvalu
-198	Taiwan, Province of China
-199	Trinidad and Tobago
-200	Turkey
-201	Tunisia
-202	Tonga
-203	Timor-Leste
-204	Turkmenistan
-205	Tajikistan
-206	Thailand
-207	Togo
-208	Chad
-209	Turks and Caicos Islands
-210	United Arab Emirates
-211	Andorra
-212	Antigua and Barbuda
-213	Afghanistan
-214	Anguilla
-215	Armenia
-216	Albania
-217	Angola
-218 Netherlands Antilles
-219	Antarctica
-220	American Samoa
-221	Argentina
-222	Australia
-223	Austria
-224	Aruba
-225	Azerbaijan
-226	Qatar
+Wallis and Futuna
+Japan
+Jamaica
+Jordan
+Samoa
+Guinea-Bissau
+Guam
+Guatemala
+Greece
+Equatorial Guinea
+Guadeloupe
+Guyana
+French Guiana
+Georgia
+Grenada
+United Kingdom
+Gabon
+Guinea
+Gambia
+Greenland
+Gibraltar
+Ghana
+Puerto Rico
+Palau
+Portugal
+Paraguay
+Panama
+French Polynesia
+Papua New Guinea
+Peru
+Pakistan
+Philippines
+Poland
+Zambia
+South Africa
+Zimbabwe
+Montenegro
+Moldova, Republic of
+Madagascar
+Morocco
+Monaco
+Myanmar
+Mali
+Mongolia
+Marshall Islands
+Macedonia, Republic of
+Mauritius
+Malta
+Malawi
+Maldives
+Martinique
+Northern Mariana Islands
+Montserrat
+Mauritania
+Malaysia
+Mexico
+Mozambique
+France
+Finland
+Fiji
+Falkland Islands (Malvinas)
+Micronesia, Federated States of
+Faroe Islands
+Cook Islands
+Côte d'Ivoire
+Switzerland
+Colombia
+China
+Cameroon
+Chile
+Canada
+Congo
+Central African Republic
+Congo, The Democratic Republic of the
+Czechia
+Cyprus
+Costa Rica
+Curaçao
+Cabo Verde
+Cuba
+Swaziland
+Syrian Arab Republic
+South Sudan
+Suriname
+El Salvador
+Sao Tome and Principe
+Slovakia
+Svalbard and Jan Mayen
+Slovenia
+Somalia
+Senegal
+San Marino
+Sierra Leone
+Seychelles
+Solomon Islands
+Saudi Arabia
+Singapore
+Sweden
+Sudan
+Yemen
+Mayotte
+Lebanon
+Saint Lucia
+Lao People's Democratic Republic
+Sri Lanka
+Liechtenstein
+Latvia
+Lithuania
+Luxembourg
+Liberia
+Lesotho
+Libya
+Holy See (Vatican City State)
+Saint Vincent and the Grenadines
+Venezuela, Bolivarian Republic of
+Virgin Islands, British
+Iraq
+Virgin Islands, U.S.
+Iceland
+Iran, Islamic Republic of
+Italy
+Viet Nam
+Isle of Man
+Israel
+India
+Ireland
+Indonesia
+Bangladesh
+Belgium
+Burkina Faso
+Bulgaria
+Bosnia and Herzegovina
+Barbados
+Bermuda
+Brunei Darussalam
+Bolivia, Plurinational State of
+Bahrain
+Burundi
+Benin
+Bhutan
+Botswana
+Brazil
+Bahamas
+Belarus
+Belize
+Russian Federation
+Rwanda
+Serbia
+Réunion
+Romania
+Oman
+Croatia
+Haiti
+Hungary
+Honduras
+Western Sahara
+Estonia
+Egypt
+Ecuador
+Ethiopia
+Spain
+Eritrea
+Uruguay
+Uzbekistan
+United States
+Uganda
+Ukraine
+Vanuatu
+Nicaragua
+Netherlands
+Norway
+Namibia
+New Caledonia
+Niger
+Nigeria
+New Zealand
+Nepal
+Niue
+Kyrgyzstan
+Kenya
+Kiribati
+Cambodia
+Saint Kitts and Nevis
+Comoros
+Korea, Republic of
+Korea, Democratic People's Republic of
+Kuwait
+Kazakhstan
+Cayman Islands
+Dominican Republic
+Dominica
+Djibouti
+Denmark
+Germany
+Algeria
+Tanzania, United Republic of
+Tuvalu
+Taiwan, Province of China
+Trinidad and Tobago
+Turkey
+Tunisia
+Tonga
+Timor-Leste
+Turkmenistan
+Tajikistan
+Thailand
+Togo
+Chad
+Turks and Caicos Islands
+United Arab Emirates
+Andorra
+Antigua and Barbuda
+Afghanistan
+Anguilla
+Armenia
+Albania
+Angola
+Netherlands Antilles
+Antarctica
+American Samoa
+Argentina
+Australia
+Austria
+Aruba
+Azerbaijan
+Qatar
