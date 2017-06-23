@@ -70,7 +70,7 @@ def train_and_eval(model_dir, training_set, testing_set, ):
 
 
 def main(_):
-    model_dir = os.path.join(os.path.dirname(__file__), '../log/model_r')
+    model_dir = os.path.join(os.path.dirname(__file__), '../log/recommendation')
     if os.path.exists(model_dir):
         shutil.rmtree(model_dir)
     data_set = pandas.read_csv(

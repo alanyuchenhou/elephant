@@ -55,7 +55,7 @@ def train_and_eval(model_dir, node_ids_path, training_set, testing_set, ):
 
 
 def main(_):
-    model_dir = os.path.join(os.path.dirname(__file__), '../log/model_r')
+    model_dir = os.path.join(os.path.dirname(__file__), '../log/graph')
     data_path = os.path.join(os.path.dirname(__file__), '../resources/countryLevelCollaboration.tsv')
     node_ids_path = os.path.join(os.path.dirname(__file__), '../resources/countries.net')
     metadata_path = os.path.join(os.path.dirname(__file__), '../resources/countries.tsv')
