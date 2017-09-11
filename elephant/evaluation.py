@@ -23,11 +23,13 @@ def read_file(data_file):
 def input_fn(links, num_epochs, shuffle):
     targets = links[TARGET_ATTRIBUTE]
     links = links.dropna(how='any', axis=0, )
-    batch_size = 128
-    return tensorflow.estimator.inputs.pandas_input_fn(links, targets, batch_size, num_epochs, shuffle)
+    return tensorflow.estimator.inputs.pandas_input_fn(links, targets, num_epochs=num_epochs, shuffle=shuffle, )
 
 
-def evaluate(model_dir, training_file, testing_file, dimension, num_epochs):
+def evaluate(data_set_name, training_file, testing_file, dimension, num_epochs, trial):
+    model_dir = os.path.join('../log', data_set_name, str(num_epochs), str(dimension), str(trial))
+    if os.path.exists(model_dir):
+        shutil.rmtree(model_dir)
     training_set = read_file(training_file)
     testing_set = read_file(testing_file)
     categorical_columns = [
@@ -46,24 +48,20 @@ def evaluate(model_dir, training_file, testing_file, dimension, num_epochs):
 
 
 def main():
-    for data_set_name in ['airport', 'collaboration', 'congress', 'forum', ]:
-        for num_epochs in [4, 8, 16, 32, ]:
-            for dimension in [4, 8, 16, 32, ]:
-                model_dir = os.path.join('../log', data_set_name, str(num_epochs), str(dimension))
-                if os.path.exists(model_dir):
-                    shutil.rmtree(model_dir)
-                print(
-                    'data_set_name:', data_set_name,
-                    'num_epochs:', num_epochs,
-                    'dimension:', dimension,
+    errors = pandas.DataFrame(columns=['data_set_name', 'num_epochs', 'dimension', 'error', ])
+    # for data_set_name in ['airport', 'collaboration', 'congress', 'forum', ]:
+    for data_set_name in ['airport', ]:
+        training_file = os.path.join('../data', data_set_name + '_training.csv')
+        testing_file = os.path.join('../data', data_set_name + '_testing.csv')
+        for num_epochs in range(1, 11):
+            for dimension in [4, ]:
+                error = numpy.mean([
                     evaluate(
-                        model_dir,
-                        os.path.join('../data', data_set_name + '_training.csv'),
-                        os.path.join('../data', data_set_name + '_testing.csv'),
-                        dimension,
-                        num_epochs,
-                    )
-                )
+                        data_set_name, training_file, testing_file, dimension, num_epochs, trial
+                    ) for trial in range(10)
+                ])
+                errors.loc[len(errors)] = [data_set_name, num_epochs, dimension, error]
+    print(errors)
 
 
 if __name__ == '__main__':
