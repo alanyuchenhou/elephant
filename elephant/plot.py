@@ -21,8 +21,26 @@ def compare():
     axes.get_figure().savefig('../log/link-weight-errors')
 
 
+def error_vs_num_epochs(data_set):
+    node2vec_errors = pandas.read_csv('../../node2vec/log/' + data_set + '/errors.csv')
+    model_r_errors = pandas.read_csv('../../model_r/log/' + data_set + '/errors.csv')
+    errors = pandas.DataFrame({
+        'node2vec': node2vec_errors['error'].tolist(),
+        'ModelR': model_r_errors['error'].tolist(),
+    },
+        index=model_r_errors['num_epochs'].tolist(),
+    )
+    axes = errors.plot()
+    axes.set_xlabel('num_epochs')
+    axes.set_ylabel('mean_squared_error')
+    axes.set_title(data_set)
+    axes.get_figure().savefig('../log/error_vs_num_epochs_' + data_set)
+
+
 def main():
-    compare()
+    # compare()
+    for data_set in ['airport', 'collaboration', 'congress', 'forum', ]:
+        error_vs_num_epochs(data_set)
 
 
 if __name__ == '__main__':

@@ -37,10 +37,10 @@ def evaluate(data_set_name, training_file, testing_file, dimension, num_epochs, 
             attribute, training_set[attribute].apply(str).unique(),
         ) for attribute in FEATURE_ATTRIBUTES
     ]
-    embedding_columns = [
+    feature_columns = [
         tensorflow.feature_column.embedding_column(column, dimension) for column in categorical_columns
     ]
-    model = tensorflow.estimator.DNNRegressor([dimension, dimension, ], embedding_columns, model_dir, )
+    model = tensorflow.estimator.DNNRegressor([dimension, dimension], feature_columns, model_dir, )
     model.train(input_fn(training_set, num_epochs, True), )
     predictions = list(model.predict(input_fn(testing_set, 1, False)))
     actual_targets = numpy.concatenate([prediction['predictions'] for prediction in predictions])
@@ -48,20 +48,21 @@ def evaluate(data_set_name, training_file, testing_file, dimension, num_epochs, 
 
 
 def main():
-    errors = pandas.DataFrame(columns=['data_set_name', 'num_epochs', 'dimension', 'error', ])
-    # for data_set_name in ['airport', 'collaboration', 'congress', 'forum', ]:
-    for data_set_name in ['airport', ]:
+    for data_set_name in ['airport', 'collaboration', 'congress', 'forum', ]:
+        # for data_set_name in ['congress']:
+        errors = pandas.DataFrame(columns=['num_epochs', 'dimension', 'error', ])
         training_file = os.path.join('../data', data_set_name + '_training.csv')
         testing_file = os.path.join('../data', data_set_name + '_testing.csv')
-        for num_epochs in range(1, 11):
-            for dimension in [4, ]:
+        for num_epochs in range(2, 20, 2):
+            for dimension in [32]:
                 error = numpy.mean([
                     evaluate(
                         data_set_name, training_file, testing_file, dimension, num_epochs, trial
-                    ) for trial in range(10)
+                    ) for trial in range(20)
                 ])
-                errors.loc[len(errors)] = [data_set_name, num_epochs, dimension, error]
-    print(errors)
+                errors.loc[len(errors)] = [num_epochs, dimension, error]
+        print(errors)
+        errors.to_csv('../log/' + data_set_name + '/errors.csv', index=False)
 
 
 if __name__ == '__main__':
