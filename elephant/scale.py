@@ -12,7 +12,7 @@ def make_data_files(links_file, training_file, testing_file):
 
 
 def main():
-    for data_set_name in ['airport', 'collaboration', 'congress', 'forum']:
+    for data_set_name in ['airport', 'authors', 'collaboration', 'facebook', 'congress', 'forum']:
         links_file = '../graph/' + data_set_name + '.tsv'
         training_file = '../data/' + data_set_name + '_training.csv'
         testing_file = '../data/' + data_set_name + '_testing.csv'

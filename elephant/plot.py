@@ -34,13 +34,13 @@ def plot_errors(data_set, parameter):
     axes.set_xlabel(parameter)
     axes.set_ylabel('mean_squared_error')
     axes.set_title(data_set)
-    axes.get_figure().savefig('../log/error_vs_' + parameter + '_' + data_set)
+    axes.get_figure().savefig('../log/' + parameter + '_' + data_set)
 
 
 def main():
     # compare()
-    for data_set in ['airport', 'collaboration', 'congress', 'forum', ]:
-        plot_errors(data_set, 'dimension')
+    for data_set in ['airport', 'authors', 'collaboration', 'facebook', 'congress', 'forum']:
+        plot_errors(data_set, 'num_hidden_layers')
 
 
 if __name__ == '__main__':
