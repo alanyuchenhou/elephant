@@ -1,5 +1,6 @@
 import os
 import shutil
+import time
 
 import numpy
 import pandas
@@ -45,7 +46,7 @@ def evaluate(data_set_name, num_hidden_layers, units_per_layer, num_epochs, tria
         tensorflow.feature_column.embedding_column(column, units_per_layer) for column in categorical_columns
     ]
     model = tensorflow.estimator.DNNRegressor([units_per_layer] * num_hidden_layers, feature_columns, model_dir, )
-    model.train(input_fn(training_set, num_epochs, True), )
+    model.train(input_fn(training_set, num_epochs, False), )
     predictions = list(model.predict(input_fn(testing_set, 1, False)))
     actual_targets = numpy.concatenate([prediction['predictions'] for prediction in predictions])
     return metrics.mean_squared_error(actual_targets, testing_set[TARGET_ATTRIBUTE])
@@ -54,14 +55,17 @@ def evaluate(data_set_name, num_hidden_layers, units_per_layer, num_epochs, tria
 def main():
     for data_set_name in ['airport', 'authors', 'collaboration', 'facebook', 'congress', 'forum']:
         errors = pandas.DataFrame(columns=['num_epochs', 'num_hidden_layers', 'units_per_layer', 'error', ])
-        for num_epochs in range(4, 5, 1):
-            for num_hidden_layers in range(1, 10, 1):
-                for units_per_layer in range(80, 90, 10):
+        for num_epochs in range(1, 2, 1):
+            for num_hidden_layers in range(1, 2, 1):
+                for units_per_layer in range(90, 100, 10):
+                    start_time = time.time()
                     error = numpy.mean([
                         evaluate(
                             data_set_name, num_hidden_layers, units_per_layer, num_epochs, trial
-                        ) for trial in range(10)
+                        ) for trial in range(1)
                     ])
+                    elapsed_time = time.time() - start_time
+                    print(data_set_name, elapsed_time)
                     errors.loc[len(errors)] = [num_epochs, num_hidden_layers, units_per_layer, error]
         print(errors)
         errors.to_csv('../log/' + data_set_name + '/errors.csv', index=False)
