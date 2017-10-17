@@ -31,13 +31,13 @@ def plot_running_time(data_sets):
 
 
 def plot_errors(data_set, parameter):
-    node2vec_errors = pandas.read_csv('../../node2vec/log/' + data_set + '/errors.csv')
-    model_r_errors = pandas.read_csv('../../model_r/log/' + data_set + '/errors.csv')
+    models = ['lle', 'node2vec', 'model_r']
     errors = pandas.DataFrame({
-        'node2vec': node2vec_errors['error'].tolist(),
-        'ModelR': model_r_errors['error'].tolist(),
+        model: pandas.read_csv(
+            '../../' + model + '/log/' + data_set + '/errors.csv'
+        )['error'].tolist() for model in models
     },
-        index=model_r_errors[parameter].tolist(),
+        index=pandas.read_csv('../../model_r/log/' + data_set + '/errors.csv')[parameter].tolist(),
     )
     axes = errors.plot(ylim=(0, 0.07))
     axes.set_xlabel(parameter)
@@ -49,9 +49,9 @@ def plot_errors(data_set, parameter):
 def main():
     data_sets = ['airport', 'authors', 'collaboration', 'facebook', 'congress', 'forum']
     # compare(data_sets)
-    plot_running_time(data_sets)
-    # for data_set in data_sets:
-    #     plot_errors(data_set, 'num_hidden_layers')
+    # plot_running_time(data_sets)
+    for data_set in data_sets:
+        plot_errors(data_set, 'num_epochs')
 
 
 if __name__ == '__main__':
