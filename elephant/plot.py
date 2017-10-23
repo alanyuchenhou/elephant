@@ -2,12 +2,22 @@ import pandas
 
 
 def compare(data_sets):
-    models = ['pWSBM', 'bWSBM', 'SBM', 'DCWBM', 'node2vec', 'LLE', 'Model R', ]
+    # models = ['pWSBM', 'bWSBM', 'SBM', 'DCWBM', 'node2vec', 'LLE', 'Model R', ]
+    # errors = pandas.DataFrame([
+    #     [0.0486, 0.0543, 0.0632, 0.0746, 0.0171, 0.0170, 0.0114, ],
+    #     [0.0407, 0.0462, 0.0497, 0.0500, 0.0614, 0.0576, 0.0327, ],
+    #     [0.0571, 0.0594, 0.0634, 0.0653, 0.0386, 0.0448, 0.0365, ],
+    #     [0.0726, 0.0845, 0.0851, 0.0882, 0.0312, 0.0304, 0.0298, ],
+    # ],
+    #     data_sets,
+    #     models,
+    # )
+    models = ['pWSBM', 'SBM', 'node2vec', 'LLE', 'Model R', ]
     errors = pandas.DataFrame([
-        [0.0486, 0.0543, 0.0632, 0.0746, 0.0171, 0.0170, 0.0114, ],
-        [0.0407, 0.0462, 0.0497, 0.0500, 0.0614, 0.0576, 0.0327, ],
-        [0.0571, 0.0594, 0.0634, 0.0653, 0.0386, 0.0448, 0.0365, ],
-        [0.0726, 0.0845, 0.0851, 0.0882, 0.0312, 0.0304, 0.0298, ],
+        [0.0486, 0.0632, 0.0171, 0.0170, 0.0114, ],
+        [0.0407, 0.0497, 0.0614, 0.0576, 0.0327, ],
+        [0.0571, 0.0634, 0.0386, 0.0448, 0.0365, ],
+        [0.0726, 0.0851, 0.0312, 0.0304, 0.0298, ],
     ],
         data_sets,
         models,
@@ -17,7 +27,7 @@ def compare(data_sets):
     axes.set_xlabel('dataset')
     axes.set_ylabel('mean squared error')
     axes.legend(loc='upper left', ncol=6, )
-    axes.get_figure().savefig('../log/link-weight-errors')
+    axes.get_figure().savefig('../log/weight-errors')
 
 
 def plot_running_time(data_sets):
@@ -47,11 +57,11 @@ def plot_errors(data_set, parameter):
 
 
 def main():
+    # compare(['airport', 'collaboration', 'congress', 'forum'])
     data_sets = ['airport', 'authors', 'collaboration', 'facebook', 'congress', 'forum']
-    # compare(data_sets)
     # plot_running_time(data_sets)
     for data_set in data_sets:
-        plot_errors(data_set, 'num_epochs')
+        plot_errors(data_set, 'units_per_layer')
 
 
 if __name__ == '__main__':
