@@ -1,7 +1,8 @@
 import pandas
 
 
-def compare(data_sets):
+def compare():
+    data_sets = ['airport', 'collaboration', 'congress', 'forum']
     # models = ['pWSBM', 'bWSBM', 'SBM', 'DCWBM', 'node2vec', 'LLE', 'Model R', ]
     # errors = pandas.DataFrame([
     #     [0.0486, 0.0543, 0.0632, 0.0746, 0.0171, 0.0170, 0.0114, ],
@@ -12,7 +13,7 @@ def compare(data_sets):
     #     data_sets,
     #     models,
     # )
-    models = ['pWSBM', 'SBM', 'node2vec', 'LLE', 'Model R', ]
+    models = ['pwsbm', 'sbm', 'model-s(node2vec)', 'model-s(lle)', 'model-s(model-r)', ]
     errors = pandas.DataFrame([
         [0.0486, 0.0632, 0.0171, 0.0170, 0.0114, ],
         [0.0407, 0.0497, 0.0614, 0.0576, 0.0327, ],
@@ -57,11 +58,11 @@ def plot_errors(data_set, parameter):
 
 
 def main():
-    # compare(['airport', 'collaboration', 'congress', 'forum'])
-    data_sets = ['airport', 'authors', 'collaboration', 'facebook', 'congress', 'forum']
+    compare()
+    # data_sets = ['airport', 'authors', 'collaboration', 'facebook', 'congress', 'forum']
     # plot_running_time(data_sets)
-    for data_set in data_sets:
-        plot_errors(data_set, 'units_per_layer')
+    # for data_set in data_sets:
+    #     plot_errors(data_set, 'units_per_layer')
 
 
 if __name__ == '__main__':

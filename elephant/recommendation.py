@@ -61,9 +61,9 @@ def train_and_eval(model_dir, training_set, testing_set, ):
         hidden_units=[3, ],
         feature_columns=embedding_columns,
         model_dir=model_dir,
-        config=learn.RunConfig(save_checkpoints_secs=1, ),
+        config=learn.RunConfig(save_checkpoints_secs=100, ),
     )
-    model.fit(input_fn=lambda: input_fn(training_set), steps=len(training_set), )
+    model.fit(input_fn=lambda: input_fn(training_set), steps=20000, )
     results = model.evaluate(input_fn=lambda: input_fn(testing_set), steps=1)
     for key in sorted(results):
         print('%s: %s' % (key, results[key]))
