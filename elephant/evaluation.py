@@ -1,5 +1,6 @@
 import os
 import shutil
+import time
 
 import numpy
 import pandas
@@ -53,19 +54,20 @@ def evaluate(data_set_name, num_hidden_layers, units_per_layer, num_epochs, tria
 
 def main():
     for data_set_name in ['airport', 'authors', 'collaboration', 'facebook', 'congress', 'forum']:
+        start_time = time.time()
         errors = pandas.DataFrame(columns=['num_epochs', 'num_hidden_layers', 'units_per_layer', 'error', ])
         for num_epochs in range(1, 2, 1):
             for num_hidden_layers in range(2, 3, 1):
                 for units_per_layer in range(10, 100, 10):
-                    # start_time = time.time()
                     error = numpy.mean([
                         evaluate(
                             data_set_name, num_hidden_layers, units_per_layer, num_epochs, trial
                         ) for trial in range(30)
                     ])
-                    # elapsed_time = time.time() - start_time
-                    # print(data_set_name, elapsed_time)
                     errors.loc[len(errors)] = [num_epochs, num_hidden_layers, units_per_layer, error]
+
+        elapsed_time = time.time() - start_time
+        print(data_set_name, elapsed_time)
         print(errors)
         errors.to_csv('../log/' + data_set_name + '/errors.csv', index=False)
 
